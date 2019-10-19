@@ -16,24 +16,22 @@ public class CommitteeService implements CommitteeServiceI {
 	
 	@Autowired
 	private CommitteeRepository commRepo;
-	
-	private ArrayList<Committee> committeeList;
+
 	
 	
 	@Override
 	public void initialize() {
-		committeeList = (ArrayList<Committee>) commRepo.fetchAll();
+	
 	}
 
 	@Override
 	public ArrayList<Committee> listCommittees() {
-		initialize();
-		return this.committeeList;
+		ArrayList<Committee> committeeList = (ArrayList<Committee>) commRepo.fetchAll();
+		return committeeList;
 	}
 
 	@Override
 	public Committee fetchCommittee(int id) {
-		initialize();
 		Committee comm = commRepo.fetchOne(id);
 		return comm;
 	}
@@ -41,22 +39,21 @@ public class CommitteeService implements CommitteeServiceI {
 	@Override
 	public void addNewCommittee(int id, String title, int number, String type, String member, String start,
 			String end) {
-		// TODO Auto-generated method stub
-
+		Committee comm = new Committee(id, title, number, type, member, start ,end);
+		commRepo.insert(comm);
 	}
 
 	@Override
 	public void updateCommittee(int id, String title, int number, String type, String member, String start,
 			String end) {
-		// TODO Auto-generated method stub
-
+		Committee comm = new Committee(id, title, number, type, member, start ,end);
+		commRepo.update(comm);
 	}
 
 	@Override
 	public void removeCommittee(int id, String title, int number, String type, String member, String start,
 			String end) {
-		// TODO Auto-generated method stub
-
+		commRepo.delete(id);
 	}
 
 }

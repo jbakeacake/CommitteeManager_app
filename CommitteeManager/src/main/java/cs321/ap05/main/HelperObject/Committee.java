@@ -22,6 +22,12 @@ public class Committee {
 		this.start = start;
 		this.end = end;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "'" + this.title + "', '" + this.number + "', '" + this.type + "', '" + this.member + "', '" + this.start + "', '" + this.end + "'"; 
+	}
 
 	public int getId() {
 		return id;
