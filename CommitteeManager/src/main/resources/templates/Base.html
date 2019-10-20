@@ -129,6 +129,72 @@
 	    </div>
 	  </div>
 	</div>
+	<!-- UPDATE MODAL -->
+	<div class="modal fade" id="updateMod" tabindex="-1" role="dialog" aria-labelledby="updateMod_title" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="updateMod_title">Update a Committee</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<!--  ID (readonly) -->
+	      	<div class="form-group">
+				<label class="form-label" for="upmod_txtID">ID</label>
+				<input id="upmod_txtID" class="form-control" type="text" name="title" readonly/>
+			</div>	      	
+	        <!-- TITLE -->
+			<div class="form-group">
+				<label class="form-label" for="upmod_txtTitle">Formal Title</label>
+				<input id="upmod_txtTitle" class="form-control" type="text" name="title" placeholder="title (e.g. Faculty Review)"/>
+			</div>
+			<!-- NUMBER -->
+			<div class="form-group">
+				<label class="form-label" for="upmod_txtNum">Num. Members</label>
+				<input id="upmod_txtNum" class="form-control" type="number" name="number" placeholder="number (0-999)"/>
+			</div>
+			<!-- TYPE -->
+			<div class="form-group">
+				<label class="form-label" for="upmod_txtType">Type</label>
+				<select id="upmod_txtType" class="custom-select mr-sm-2" name="type">
+					<option selected>Choose Type...</option>
+					<option value="by appointment"> By Appointment </option>
+					<option value="by Election"> By Election </option>
+					<option value="by Position"> By Position </option>
+				</select>
+			</div>
+			<!-- MEMBER -->
+			<div class="form-group">
+				<label class="form-label" for="upmod_txtMember">Member Structure </label>
+				<select id="upmod_txtMember" class="custom-select mr-sm-2" name="member">
+					<option selected>Choose Structure...</option>
+					<option value="H"> Humanities </option>
+					<option value="S"> Social Science </option>
+					<option value="N"> Natural Science </option>
+					<option value="L"> At Large </option>
+					<option value="V"> Vice President </option>
+				</select>
+			</div>
+			<!-- START -->
+			<div class="form-group">
+				<label class="form-label" for="upmod_txtStart">Start Date</label>
+				<input id="upmod_txtStart" class="form-control" type="date" name="start"/>
+			</div>
+			<!-- END -->
+			<div class="form-group">
+				<label class="form-label" for="upmod_txtEnd">End Date</label>
+				<input id="upmod_txtEnd" class="form-control" type="date" name="end"/>
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <button id="btn_updateComm" type="button" class="btn btn-primary">Submit</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
     
 	<!-- Load Table Script -->
 	<script src="js/listTable.js"></script>

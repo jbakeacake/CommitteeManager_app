@@ -21,7 +21,7 @@
 	    		<td> ${comm.start} </td>
 	    		<td> ${comm.end} </td>
 	    		<td class="text-right"> 
-	    			<button id="ud_icons" type="button" class="btn btn-info p-1 mx-1">
+	    			<button id="ud_icons" type="button" class="btn btn-info p-1 mx-1" data-toggle="modal" data-target="#updateMod" onclick="fillUpdateForm(${comm.id}, ${comm}); return false;">
 	    		   		<i class="fas fa-wrench px"></i> 
 	    		   	</button>
 	    		   	<button id="ud_icons" type="button" class="btn btn-danger p-1 mx-1">

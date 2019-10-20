@@ -79,12 +79,12 @@ public class CommitteeRepository {
 	 */
 	public void update(Committee updatedComm)
 	{
-		String prepQuery = "UPDATE committees SET title=" + updatedComm.getTitle() + 
-				", num=" + updatedComm.getNumber() + 
-				", type=" + updatedComm.getType() + 
-				", member=" + updatedComm.getMember() + 
-				", start=" + updatedComm.getStart() + 
-				", end=" + updatedComm.getEnd() + 
+		String prepQuery = "UPDATE committees SET title='" + updatedComm.getTitle() + "'" +
+				", num=" + updatedComm.getNumber() +
+				", type='" + updatedComm.getType() + "'" +
+				", member='" + updatedComm.getMember() + "'" +
+				", start='" + updatedComm.getStart() + "'" +
+				", end='" + updatedComm.getEnd() + "'" +
 				" WHERE id =" + updatedComm.getId();
 		System.out.println(prepQuery);
 		template.update(prepQuery);
