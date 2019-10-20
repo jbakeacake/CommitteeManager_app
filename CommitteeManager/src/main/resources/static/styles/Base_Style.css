@@ -1,0 +1,34 @@
+html {
+	height: 100%;
+	widht: 100%;
+	margin: 0;
+}
+
+body {
+	height: 100%;
+	widht: 100%;
+	margin: 0;
+	background-color: bg-light;
+}
+
+i
+{
+	width: 20px;
+}
+
+#ud_icons
+{
+	width: 40px;
+	margin: 0px;
+	visibility: hidden;
+}
+
+tr:hover #ud_icons
+{
+	visibility: visible;
+}
+
+.remaining
+{
+	height: 100%;
+}

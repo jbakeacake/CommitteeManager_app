@@ -11,10 +11,44 @@ public class Committee {
 					end;
 	
 	
-
+	/**
+	 * Committee(...)
+	 * 
+	 * This construction method allows us to fetch an entire row from our database to be edited later on.
+	 * This construction type is made used when fetching from the database.
+	 * 
+	 * @param id
+	 * @param title
+	 * @param number
+	 * @param type
+	 * @param member
+	 * @param start
+	 * @param end
+	 */
 	public Committee(int id, String title, int number, String type, String member, String start, String end) {
 		super();
 		this.id = id;
+		this.title = title;
+		this.number = number;
+		this.type = type;
+		this.member = member;
+		this.start = start;
+		this.end = end;
+	}
+	
+	/**
+	 * This construction method doesn't require an ID -- since we're using H2 Database ticks.
+	 * 
+	 * @param title
+	 * @param number
+	 * @param type
+	 * @param member
+	 * @param start
+	 * @param end
+	 */
+	public Committee(String title, int number, String type, String member, String start, String end)
+	{
+		super();
 		this.title = title;
 		this.number = number;
 		this.type = type;

@@ -37,9 +37,9 @@ public class CommitteeService implements CommitteeServiceI {
 	}
 
 	@Override
-	public void addNewCommittee(int id, String title, int number, String type, String member, String start,
+	public void addNewCommittee(String title, int number, String type, String member, String start,
 			String end) {
-		Committee comm = new Committee(id, title, number, type, member, start ,end);
+		Committee comm = new Committee(title, number, type, member, start ,end);
 		commRepo.insert(comm);
 	}
 
@@ -51,8 +51,7 @@ public class CommitteeService implements CommitteeServiceI {
 	}
 
 	@Override
-	public void removeCommittee(int id, String title, int number, String type, String member, String start,
-			String end) {
+	public void removeCommittee(int id) {
 		commRepo.delete(id);
 	}
 

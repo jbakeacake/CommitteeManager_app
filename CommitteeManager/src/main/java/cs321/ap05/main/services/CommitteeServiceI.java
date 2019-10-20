@@ -12,7 +12,7 @@ public interface CommitteeServiceI {
 	
 	//CRUD Ops:
 	public Committee fetchCommittee(int id);
-	public void addNewCommittee(int id, String title, int number, String type, String member, String start, String end);
+	public void addNewCommittee(String title, int number, String type, String member, String start, String end);
 	public void updateCommittee(int id, String title, int number, String type, String member, String start, String end);
-	public void removeCommittee(int id, String title, int number, String type, String member, String start, String end);
+	public void removeCommittee(int id);
 }

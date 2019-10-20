@@ -1,11 +1,12 @@
 package cs321.ap05.main.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 
 import cs321.ap05.main.services.CommitteeService;
 
@@ -15,16 +16,54 @@ public class CommitteeServiceController {
 	@Autowired
 	CommitteeService commService;
 	
-	@GetMapping("/committees")
-	public ResponseEntity<Object> getCommittees()
+	@GetMapping("/home")
+	public ModelAndView base(HttpServletRequest request, HttpServletResponse res)
 	{
-		return new ResponseEntity<>(commService.listCommittees(), HttpStatus.OK);
+		res.setContentType("text/html");
+		ModelAndView mav = new ModelAndView("Base");
+		
+		return mav;
 	}
 	
-	@GetMapping("/committees/{id}")
-	public ResponseEntity<Object> getCommittee(@PathVariable("id") String id)
+	@GetMapping("/ajax/committee/list")
+	public ModelAndView ajaxCommList(HttpServletRequest request, HttpServletResponse res)
 	{
-		int parsedID = Integer.parseInt(id); // Since we're pulling from our URL path -- it will pass in a string for the id
-		return new ResponseEntity<>(commService.fetchCommittee(parsedID), HttpStatus.OK);
+		res.setContentType("text/html");
+		
+		ModelAndView mav = new ModelAndView("ajax_committeeTable");
+		
+		mav.addObject("comms", commService.listCommittees());
+		
+		return mav;
 	}
+	
+	@GetMapping("/ajax/committee/add")
+	public ModelAndView ajaxCommAdd(HttpServletRequest request, HttpServletResponse res)
+	{
+		res.setContentType("text/html");
+		
+		try
+		{
+			String title = request.getParameter("title");
+			System.out.println(title);
+			int number = Integer.parseInt(request.getParameter("number"));
+			String type = request.getParameter("type");
+			String member = request.getParameter("member");
+			String start = request.getParameter("start");
+			String end = request.getParameter("end");
+			
+			commService.addNewCommittee(title, number, type, member, start, end);
+			ModelAndView mav = new ModelAndView("ajax_committeeTable");
+			mav.addObject("comms", commService.listCommittees());
+			
+			return mav;	
+		} 
+		catch (Exception e)
+		{
+			System.err.println("UH OH");
+			ModelAndView mav = new ModelAndView("ajax_err");
+			return mav;
+		}
+	}
+	
 }
