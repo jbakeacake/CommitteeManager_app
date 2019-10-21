@@ -45,7 +45,6 @@ public class CommitteeServiceController {
 		try
 		{
 			String title = request.getParameter("title");
-			System.out.println(title);
 			int number = Integer.parseInt(request.getParameter("number"));
 			String type = request.getParameter("type");
 			String member = request.getParameter("member");
@@ -61,6 +60,60 @@ public class CommitteeServiceController {
 		catch (Exception e)
 		{
 			System.err.println("UH OH");
+			ModelAndView mav = new ModelAndView("ajax_err");
+			return mav;
+		}
+	}
+	
+	@GetMapping("/ajax/committee/update")
+	public ModelAndView ajaxCommUpdate(HttpServletRequest request, HttpServletResponse res)
+	{
+		res.setContentType("text/html");
+		
+		try
+		{
+			int id = Integer.parseInt(request.getParameter("id"));
+			String title = request.getParameter("title");
+			int number = Integer.parseInt(request.getParameter("number"));
+			String type = request.getParameter("type");
+			String member = request.getParameter("member");
+			String start = request.getParameter("start");
+			String end = request.getParameter("end");
+			
+			commService.updateCommittee(id, title, number, type, member, start, end);
+			ModelAndView mav = new ModelAndView("ajax_committeeTable");
+			mav.addObject("comms", commService.listCommittees());
+			
+			return mav;
+		}
+		catch (NumberFormatException e)
+		{
+			e.printStackTrace();
+			System.err.println("WUH OH");
+			ModelAndView mav = new ModelAndView("ajax_err");
+			return mav;
+		}
+	}
+	
+	@GetMapping("/ajax/committee/remove")
+	public ModelAndView ajaxCommRemove(HttpServletRequest request, HttpServletResponse res)
+	{
+		res.setContentType("text/html");
+		
+		try
+		{
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			commService.removeCommittee(id);
+			ModelAndView mav = new ModelAndView("ajax_committeeTable");
+			mav.addObject("comms", commService.listCommittees());
+			
+			return mav;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			System.err.println("WUH OH");
 			ModelAndView mav = new ModelAndView("ajax_err");
 			return mav;
 		}
