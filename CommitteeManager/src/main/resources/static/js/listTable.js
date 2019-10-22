@@ -1,3 +1,36 @@
+const fillUpdateForm = (id, title, number, type, member, start, end) => {
+	$('#upmod_txtID').val(id);
+	$('#upmod_txtTitle').val(title);
+	$('#upmod_txtNum').val(number);
+	$('#upmod_txtType').val(type);
+	$('#upmod_txtMember').val(member);
+	$('#upmod_txtStart').val(start);
+	$('#upmod_txtEnd').val(end);
+}
+
+const fillIDonForm = (id) => {
+	$('#deletemod_txtID').val(id);
+}
+
+const emptyForm = (formLbls) => {
+	$(formLbls.title).val('');
+	$(formLbls.number).val('');
+	$(formLbls.type).val('');
+	$(formLbls.member).val('');
+	$(formLbls.start).val('');
+	$(formLbls.end).val('');
+}
+
+const validateEntries = (entries) => {
+	for(var key in entries) {
+		if(entries[key] == "" || entries[key] === undefined) {
+			return false;
+		}
+	}
+	
+	return true;
+}
+
 const removeComm = (comm) => {
 	var idStr = $(comm.id).val();
 	
@@ -24,6 +57,20 @@ const updateComm = (comm) => {
 	var startStr = $(comm.start).val();
 	var endStr = $(comm.end).val();
 	
+	var entries = {
+			title: titleStr,
+			number: numberStr,
+			type: typeStr,
+			member: memberStr,
+			start: startStr,
+			end: endStr
+	}
+	
+	if(!validateEntries(entries)) {
+		alert("Invalid entries. Please make sure you have entered ALL values.");
+		return;
+	}
+	
 	$.ajax({
 		method: "GET",
 		url: "/ajax/committee/update",
@@ -46,29 +93,6 @@ const updateComm = (comm) => {
 	});
 }
 
-const fillUpdateForm = (id, title, number, type, member, start, end) => {
-	$('#upmod_txtID').val(id);
-	$('#upmod_txtTitle').val(title);
-	$('#upmod_txtNum').val(number);
-	$('#upmod_txtType').val(type);
-	$('#upmod_txtMember').val(member);
-	$('#upmod_txtStart').val(start);
-	$('#upmod_txtEnd').val(end);
-}
-
-const fillIDonForm = (id) => {
-	$('#deletemod_txtID').val(id);
-}
-
-const emptyForm = (formLbls) => {
-	$(formLbls.title).val('');
-	$(formLbls.number).val('');
-	$(formLbls.type).val('');
-	$(formLbls.member).val('');
-	$(formLbls.start).val('');
-	$(formLbls.end).val('');
-}
-
 const addComm = (comm) => {
 	var titleStr = $(comm.title).val();
 	var numberStr = $(comm.number).val();
@@ -76,6 +100,20 @@ const addComm = (comm) => {
 	var memberStr = $(comm.member).val();
 	var startStr = $(comm.start).val();
 	var endStr = $(comm.end).val();
+	
+	var entries = {
+			title: titleStr,
+			number: numberStr,
+			type: typeStr,
+			member: memberStr,
+			start: startStr,
+			end: endStr
+	}
+	
+	if(!validateEntries(entries)) {
+		alert("Invalid entries. Please make sure you have entered ALL values.");
+		return;
+	}
 	
 	$.ajax({
 		method: "GET",
@@ -92,6 +130,9 @@ const addComm = (comm) => {
 	})
 	.done(function(txt) {
 		$("#commTable").html(txt);
+		emptyForm(comm);
+		$('.modal-backdrop').remove();
+		$("#addMod").modal('toggle');
 	})
 	.fail(function(jqXHR, err) {
 		alert("Request Failed: " + err + " : " + jqXHR.responseText);
@@ -124,9 +165,6 @@ $(document).ready(function() {
 			  end : "#mod_txtEnd",
 	  };
 	  addComm(comm);
-	  emptyForm(comm);
-	  $('.modal-backdrop').remove();
-	  $("#addMod").modal('toggle');
 	  return false;
   });
   

@@ -69,6 +69,7 @@
     </div>
     
     <!-- the following divs will be defining our modals for our CRUD operations // hidden by JS, exposed by JQuery -->
+    <!-- ADD -->
     <div class="modal fade" id="addMod" tabindex="-1" role="dialog" aria-labelledby="addMod_title" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -93,7 +94,7 @@
 			<div class="form-group">
 				<label class="form-label" for="mod_txtType">Type</label>
 				<select id="mod_txtType" class="custom-select mr-sm-2" name="type">
-					<option selected>Choose Type...</option>
+					<option value= "" disable selected hidden>Choose Type...</option>
 					<option value="by appointment"> By Appointment </option>
 					<option value="by Election"> By Election </option>
 					<option value="by Position"> By Position </option>
@@ -103,7 +104,7 @@
 			<div class="form-group">
 				<label class="form-label" for="mod_txtMember">Member Structure </label>
 				<select id="mod_txtMember" class="custom-select mr-sm-2" name="member">
-					<option selected>Choose Structure...</option>
+					<option value= "" disable selected hidden>Choose Structure...</option>
 					<option value="H"> Humanities </option>
 					<option value="S"> Social Science </option>
 					<option value="N"> Natural Science </option>
@@ -159,7 +160,7 @@
 			<div class="form-group">
 				<label class="form-label" for="upmod_txtType">Type</label>
 				<select id="upmod_txtType" class="custom-select mr-sm-2" name="type">
-					<option selected>Choose Type...</option>
+					<option value= "" disable selected hidden>Choose Type...</option>
 					<option value="by appointment"> By Appointment </option>
 					<option value="by Election"> By Election </option>
 					<option value="by Position"> By Position </option>
@@ -169,7 +170,7 @@
 			<div class="form-group">
 				<label class="form-label" for="upmod_txtMember">Member Structure </label>
 				<select id="upmod_txtMember" class="custom-select mr-sm-2" name="member">
-					<option selected>Choose Structure...</option>
+					<option value="" disable selected hidden>Choose Structure...</option>
 					<option value="H"> Humanities </option>
 					<option value="S"> Social Science </option>
 					<option value="N"> Natural Science </option>
