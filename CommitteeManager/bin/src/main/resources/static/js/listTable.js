@@ -1,5 +1,5 @@
 const removeComm = (comm) => {
-	var idStr = $(comm.id).val();
+	var idStr = $(comm.title).val();
 	
 	$.ajax({
 		method: "GET",
@@ -54,19 +54,6 @@ const fillUpdateForm = (id, title, number, type, member, start, end) => {
 	$('#upmod_txtMember').val(member);
 	$('#upmod_txtStart').val(start);
 	$('#upmod_txtEnd').val(end);
-}
-
-const fillIDonForm = (id) => {
-	$('#deletemod_txtID').val(id);
-}
-
-const emptyForm = (formLbls) => {
-	$(formLbls.title).val('');
-	$(formLbls.number).val('');
-	$(formLbls.type).val('');
-	$(formLbls.member).val('');
-	$(formLbls.start).val('');
-	$(formLbls.end).val('');
 }
 
 const addComm = (comm) => {
@@ -124,7 +111,6 @@ $(document).ready(function() {
 			  end : "#mod_txtEnd",
 	  };
 	  addComm(comm);
-	  emptyForm(comm);
 	  $('.modal-backdrop').remove();
 	  $("#addMod").modal('toggle');
 	  return false;
@@ -146,13 +132,4 @@ $(document).ready(function() {
 	  $("#updateMod").modal('toggle');
 	  return false;
   });
-  
-  $("#btn_deleteComm").on("click", () => {
-	  var comm = {
-			  id: "#deletemod_txtID",
-	  };
-	  removeComm(comm);
-	  $('.modal-backdrop').remove();
-	  $("#deleteMod").modal('toggle');
-  })
 });

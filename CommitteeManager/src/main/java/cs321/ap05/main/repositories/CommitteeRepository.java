@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Repository;
 
 import cs321.ap05.main.HelperObject.Committee;
@@ -26,10 +27,17 @@ public class CommitteeRepository {
 	public void insert(Committee comm)
 	{
 		String prepQuery = "INSERT INTO committees (title, num, type, member, start, end) VALUES " +
-							"(" + comm.toString() + ");";
+							"(?, ?, ?, ?, ?, ?);";
+		Object[] parameters = new String[6];
+		parameters[0] = comm.getTitle() + "";
+		parameters[1] = comm.getNumber() + "";
+		parameters[2] = comm.getType() + "";
+		parameters[3] = comm.getMember() + "";
+		parameters[4] = comm.getStart() + "";
+		parameters[5] = comm.getEnd() + "";
 		
 		System.out.println(prepQuery);
-		template.update(prepQuery);
+		template.update(prepQuery, parameters);
 	}
 	
 	/**
@@ -77,17 +85,19 @@ public class CommitteeRepository {
 	 * 
 	 * void
 	 */
-	public void update(Committee updatedComm)
+	public void update(Committee comm)
 	{
-		String prepQuery = "UPDATE committees SET title='" + updatedComm.getTitle() + "'" +
-				", num=" + updatedComm.getNumber() +
-				", type='" + updatedComm.getType() + "'" +
-				", member='" + updatedComm.getMember() + "'" +
-				", start='" + updatedComm.getStart() + "'" +
-				", end='" + updatedComm.getEnd() + "'" +
-				" WHERE id =" + updatedComm.getId();
-		System.out.println(prepQuery);
-		template.update(prepQuery);
+		String prepQuery = "UPDATE committees SET title=?, num=?, type=?, member=?, start=?, end=? WHERE id=?";
+		Object[] parameters = new String[7];
+		parameters[0] = comm.getTitle() + "";
+		parameters[1] = comm.getNumber() + "";
+		parameters[2] = comm.getType() + "";
+		parameters[3] = comm.getMember() + "";
+		parameters[4] = comm.getStart() + "";
+		parameters[5] = comm.getEnd() + "";
+		parameters[6] = comm.getId() + "";
+		
+		template.update(prepQuery, parameters);
 	}
 	
 	/**
@@ -99,7 +109,7 @@ public class CommitteeRepository {
 	 */
 	public void delete(int id)
 	{
-		String prepQuery = "DELETE FROM committee WHERE id=" + id;
+		String prepQuery = "DELETE FROM committees WHERE id=" + id;
 		template.update(prepQuery);
 	}
 }
